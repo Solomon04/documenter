@@ -19,9 +19,10 @@ interface Writer
     /**
      * Create the endpoint pages
      *
-     * @param $endpoints
-     * @param $name
+     * @param Collection $endpoints
+     * @param string $name
      * @return bool|int
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function page($endpoints, $name);
 }

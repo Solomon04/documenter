@@ -18,5 +18,17 @@ class StringBladeTest extends \PHPUnit\Framework\TestCase
         $this->stringBlade = Mockery::mock(StringBlade::class);
     }
 
+    /**
+     * @covers ::render
+     */
+    public function testRender()
+    {
+        $this->stringBlade->shouldReceive('render')
+            ->with('foo', ['a' => 'b'])
+            ->andReturn('bar');
 
+        $result = $this->stringBlade->render('foo', ['a' => 'b']);
+
+        $this->assertSame('bar', $result);
+    }
 }

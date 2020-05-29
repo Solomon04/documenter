@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Console\Commands\GenerateDocumentationCommand;
+use Solomon04\Documentation\Commands\GenerateDocumentationCommand;
 use Illuminate\Support\ServiceProvider;
 use Minime\Annotations\Cache\ArrayCache;
 use Minime\Annotations\Interfaces\ReaderInterface;

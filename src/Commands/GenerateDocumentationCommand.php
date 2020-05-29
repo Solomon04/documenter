@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Solomon04\Documentation\Commands;
 
 use Solomon04\Documentation\Annotation\Endpoint;
 use Solomon04\Documentation\Contracts\Documentation;
