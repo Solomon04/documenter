@@ -12,6 +12,7 @@ use Solomon04\Documentation\Contracts\Extractor;
 use Solomon04\Documentation\Contracts\StringBlade;
 use Solomon04\Documentation\Contracts\Writer;
 use Solomon04\Documentation\DocumentationProvider;
+use Solomon04\Documentation\Exceptions\ApplicationSetupException;
 use Solomon04\Documentation\ExtractorProvider;
 use Solomon04\Documentation\StringBladeProvider;
 use Solomon04\Documentation\WriterProvider;
@@ -32,9 +33,14 @@ class DocumentationServiceProvider extends ServiceProvider
      * Bootstrap services.
      *
      * @return void
+     * @throws ApplicationSetupException
      */
     public function boot()
     {
+        if (is_null(config('larecipe'))) {
+            throw new ApplicationSetupException('Please install larecipe before continuing. https://github.com/saleem-hadad/larecipe');
+        }
+
         $this->publishes([
             __DIR__.'../config/documentation.php' => config_path('documentation.php')
         ]);
