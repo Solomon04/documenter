@@ -1,0 +1,53 @@
+version: 2
+jobs:
+  build:
+    steps:
+      - checkout
+      - run:
+          name: Install VM Dependencies
+          command: 'sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev libpng-dev redis-server'
+      - run:
+          name: Prepare PHP Extenstions
+          command: 'sudo docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd'
+      - run:
+          name: Install PHP Extenstions
+          command: 'sudo docker-php-ext-install zip mysqli pdo_mysql pdo_sqlite'
+      - run:
+          name: Install PHP Photo Extenstion
+          command: 'sudo docker-php-ext-install -j$(nproc) gd'
+      - run:
+          name: Start Redis
+          command: 'sudo service redis-server start'
+      # Download and cache dependencies
+      # composer cache
+      - restore_cache:
+          keys:
+            # "composer.json" can be used if "composer.json"
+            # is not committed to the repository.
+            - v1-dependencies-{{ checksum "composer.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Install Composer Dependencies
+          command: 'composer install -n --prefer-dist'
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      # run tests & static analysis
+      - run:
+          name: PHPUnit Tests
+          command: './vendor/bin/phpunit'
+      - run:
+          name: PHPStan Analysis
+          command: './vendor/bin/phpstan analyse --memory-limit=2G'
+      # store test results
+      - store_test_results:
+          path: tests/_output
+      - store_artifacts:
+          path: tests/_output
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build

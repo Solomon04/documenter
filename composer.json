@@ -12,6 +12,7 @@
     ],
     "require-dev": {
         "nunomaduro/collision": "^4.2",
+        "nunomaduro/larastan": "^0.5.8",
         "orchestra/testbench": "^5.2",
         "phpunit/phpunit": "^8.5"
     },
