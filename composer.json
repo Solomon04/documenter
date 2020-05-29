@@ -11,7 +11,9 @@
         }
     ],
     "require-dev": {
-        "orchestra/testbench": "^5.2"
+        "nunomaduro/collision": "^4.2",
+        "orchestra/testbench": "^5.2",
+        "phpunit/phpunit": "^8.5"
     },
     "require": {
         "php": "^7.3",
@@ -28,6 +30,16 @@
             "providers": [
                 "Solomon04\\Documentation\\DocumentationServiceProvider"
             ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Solomon04\\Documentation\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     }
 }

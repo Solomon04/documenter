@@ -5,11 +5,8 @@
          colors="true"
          printerClass="NunoMaduro\Collision\Adapters\Phpunit\Printer">
     <testsuites>
-        <testsuite name="Unit">
+        <testsuite name="Documentation Test Suite">
             <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Feature">
-            <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -17,9 +14,4 @@
             <directory suffix=".php">./app</directory>
         </whitelist>
     </filter>
-    <php>
-        <server name="APP_ENV" value="testing"/>
-        <env name="QUEUE_CONNECTION" value="database"/>
-        <server name="TELESCOPE_ENABLED" value="false"/>
-    </php>
 </phpunit>
