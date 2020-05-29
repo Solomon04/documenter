@@ -1,0 +1,33 @@
+{
+    "name": "solomon04/documentation",
+    "type": "project",
+    "keywords": ["documentation", "larecipe", "openapi", "swagger", "apidoc", "api-documentation", "rest-api", "laravel-api"],
+    "license": "MIT",
+    "description": "This allows you to generate documentation for applications that utilize LaRecipe",
+    "authors": [
+        {
+            "name": "Solomon Antoine",
+            "email": "antoinesolomon5@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "orchestra/testbench": "^5.2"
+    },
+    "require": {
+        "php": "^7.3",
+        "minime/annotations": "^3.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Solomon04\\Documentation\\DocumentationServiceProvider"
+            ]
+        }
+    }
+}
