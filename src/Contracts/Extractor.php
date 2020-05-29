@@ -5,10 +5,12 @@ namespace Solomon04\Documentation\Contracts;
 
 
 use Solomon04\Documentation\Annotation\BodyParam;
+use Solomon04\Documentation\Annotation\Group;
 use Solomon04\Documentation\Annotation\Meta;
 use Solomon04\Documentation\Annotation\QueryParam;
 use Solomon04\Documentation\Annotation\ResponseExample;
 use Illuminate\Validation\ValidationException;
+use Solomon04\Documentation\Exceptions\AnnotationException;
 
 interface Extractor
 {
@@ -24,7 +26,7 @@ interface Extractor
     public function response(string $response);
 
     /**
-     * Strip the meta annotation from the controller.
+     * Strip the meta annotation from a controller method.
      *
      * @param string $meta
      * @return Meta|string
@@ -36,8 +38,8 @@ interface Extractor
      * Strip the group annotation from the controller.
      *
      * @param string $group
-     * @return Meta|string
-     * @throws ValidationException
+     * @return Group|string
+     * @throws AnnotationException
      */
     public function group(string $group);
 
@@ -46,7 +48,7 @@ interface Extractor
      *
      * @param string $body
      * @return BodyParam|string
-     * @throws ValidationException
+     * @throws AnnotationException
      */
     public function body(string $body);
 
@@ -55,7 +57,7 @@ interface Extractor
      *
      * @param string $query
      * @return QueryParam|string
-     * @throws ValidationException
+     * @throws AnnotationException
      */
     public function query(string $query);
 }

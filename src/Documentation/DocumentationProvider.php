@@ -99,6 +99,7 @@ class DocumentationProvider implements Documentation
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      * @throws \Illuminate\Validation\ValidationException
      * @throws \ReflectionException
+     * @throws Exceptions\AnnotationException
      */
     public function getMethodDocBlock(Endpoint $endpoint)
     {
@@ -151,9 +152,9 @@ class DocumentationProvider implements Documentation
      * Get the group from a class.
      *
      * @param $key
-     * @return Annotation\Meta|string
+     * @return Group|string
      * @throws \ReflectionException
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws Exceptions\AnnotationException
      */
     public function getClassDocBlocks($key)
     {

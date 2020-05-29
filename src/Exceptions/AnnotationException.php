@@ -4,7 +4,7 @@
 namespace Solomon04\Documentation\Exceptions;
 
 
-class AnnotationException
+class AnnotationException extends \Exception
 {
 
 }

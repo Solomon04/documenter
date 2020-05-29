@@ -5,14 +5,15 @@ namespace Solomon04\Documentation;
 
 
 use Solomon04\Documentation\Annotation\BodyParam;
+use Solomon04\Documentation\Annotation\Group;
 use Solomon04\Documentation\Annotation\Meta;
 use Solomon04\Documentation\Annotation\QueryParam;
 use Solomon04\Documentation\Annotation\ResponseExample;
 use Solomon04\Documentation\Contracts\Extractor;
-use App\Rules\ResponseExampleExists;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Validation\Factory as Validator;
 use Illuminate\Validation\ValidationException;
+use Solomon04\Documentation\Exceptions\AnnotationException;
 
 class ExtractorProvider implements Extractor
 {
@@ -38,9 +39,8 @@ class ExtractorProvider implements Extractor
      *
      * @param string $response
      * @return ResponseExample
-     * @throws ValidationException
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * @throws AnnotationException
      */
     public function response(string $response)
     {
@@ -55,14 +55,7 @@ class ExtractorProvider implements Extractor
             $responses[$name] = $data[1];
         }
 
-        $validator = $this->validator->make($responses, [
-            'status' => ['required', 'numeric', 'string'],
-            'example' => ['string', new ResponseExampleExists()]
-        ], ['example' => 'The response file was not found.']);
-
-        if(!$validator->passes()) {
-            throw new ValidationException($validator);
-        }
+        ResponseExample::validate($responses);
 
         foreach ($responses as $item => $value) {
             $responseExample->$item = str_replace('"', '', $value);
@@ -76,11 +69,11 @@ class ExtractorProvider implements Extractor
     }
 
     /**
-     * Strip the meta annotation from the controller.
+     * Strip the meta annotation from a controller method.
      *
      * @param string $meta
      * @return Meta|string
-     * @throws ValidationException
+     * @throws AnnotationException
      */
     public function meta(string $meta)
     {
@@ -95,15 +88,7 @@ class ExtractorProvider implements Extractor
             $params[$name] = $data[1];
         }
 
-        $validator = $this->validator->make($params, [
-            'name' => ['required', 'string'],
-            'href' => ['required', 'string'],
-            'description' => ['string']
-        ]);
-
-        if(!$validator->passes()) {
-            throw new ValidationException($validator, $validator->errors()->messages());
-        }
+        Meta::validate($params);
 
         foreach ($params as $item => $value) {
             $meta->$item = str_replace('"', '', $value);;
@@ -116,13 +101,13 @@ class ExtractorProvider implements Extractor
      * Strip the group annotation from the controller.
      *
      * @param string $group
-     * @return Meta|string
-     * @throws ValidationException
+     * @return Group|string
+     * @throws AnnotationException
      */
     public function group(string $group)
     {
         $stringedArray = explode(',', str_replace(array( '(', ')'), '', $group));
-        $group = new Meta();
+        $group = new Group();
         $params = [];
         foreach ($stringedArray as $arr) {
             $data = explode('=', $arr);
@@ -132,14 +117,7 @@ class ExtractorProvider implements Extractor
             $params[$name] = $data[1];
         }
 
-        $validator = $this->validator->make($params, [
-            'name' => ['required', 'string'],
-            'description' => ['string']
-        ]);
-
-        if(!$validator->passes()) {
-            throw new ValidationException($validator);
-        }
+        Group::validate($params);
 
         foreach ($params as $item => $value) {
             $group->$item = str_replace('"', '', $value);
@@ -153,7 +131,7 @@ class ExtractorProvider implements Extractor
      *
      * @param string $body
      * @return BodyParam|string
-     * @throws ValidationException
+     * @throws AnnotationException
      */
     public function body(string $body)
     {
@@ -168,19 +146,11 @@ class ExtractorProvider implements Extractor
             $params[$name] = $data[1];
         }
 
-        $validator = $this->validator->make($params, [
-            'name' => ['required', 'string'],
-        ]);
-
-        if(!$validator->passes()) {
-            throw new ValidationException($validator);
-        }
-
+        BodyParam::validate($params);
 
         foreach ($params as $item => $value) {
             $body->$item = str_replace('"', '', $value);
         }
-
 
         return $body;
     }
@@ -190,7 +160,7 @@ class ExtractorProvider implements Extractor
      *
      * @param string $query
      * @return QueryParam|string
-     * @throws ValidationException
+     * @throws AnnotationException
      */
     public function query(string $query)
     {
@@ -205,14 +175,7 @@ class ExtractorProvider implements Extractor
             $params[$name] = $data[1];
         }
 
-        $validator = $this->validator->make($params, [
-            'name' => ['required', 'string'],
-        ]);
-
-        if(!$validator->passes()) {
-            throw new ValidationException($validator);
-        }
-
+        QueryParam::validate($params);
 
         foreach ($params as $item => $value) {
             $query->$item = str_replace('"', '', $value);
