@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Solomon04\Documentation;
 
 use Solomon04\Documentation\Commands\GenerateDocumentationCommand;
 use Illuminate\Support\ServiceProvider;
@@ -11,11 +11,11 @@ use Solomon04\Documentation\Contracts\Documentation;
 use Solomon04\Documentation\Contracts\Extractor;
 use Solomon04\Documentation\Contracts\StringBlade;
 use Solomon04\Documentation\Contracts\Writer;
-use Solomon04\Documentation\DocumentationProvider;
+use Solomon04\Documentation\Documenter\DocumentationProvider;
+use Solomon04\Documentation\Documenter\ExtractorProvider;
+use Solomon04\Documentation\Documenter\StringBladeProvider;
+use Solomon04\Documentation\Documenter\WriterProvider;
 use Solomon04\Documentation\Exceptions\ApplicationSetupException;
-use Solomon04\Documentation\ExtractorProvider;
-use Solomon04\Documentation\StringBladeProvider;
-use Solomon04\Documentation\WriterProvider;
 
 class DocumentationServiceProvider extends ServiceProvider
 {

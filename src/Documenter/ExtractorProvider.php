@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Solomon04\Documentation;
+namespace Solomon04\Documentation\Documenter;
 
 
 use Solomon04\Documentation\Annotation\BodyParam;
