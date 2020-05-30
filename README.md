@@ -1,7 +1,7 @@
 <h1 align="center">
     Laravel REST API Documenter
     <br>
-    <img src="/example.png" alt="example" height="300">
+    <img src="/example.png" alt="example" height="600">
 </h1>
 
 <p align="center">
