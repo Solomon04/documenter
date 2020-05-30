@@ -1,7 +1,5 @@
 - ## Getting Started
   - [Overview](/&#123;&#123;route&#125;&#125;/&#123;&#123;version&#125;&#125;/overview)
-  - [Enum Data](/&#123;&#123;route&#125;&#125;/&#123;&#123;version&#125;&#125;/enums)
-  - [Models](/&#123;&#123;route&#125;&#125;/&#123;&#123;version&#125;&#125;/models)
 - ## Endpoints
   @foreach($namespaces as $namespaceKey => $namespaceValue)
   - [{{$namespaceKey}}](#)
