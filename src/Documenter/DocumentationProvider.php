@@ -193,7 +193,6 @@ class DocumentationProvider implements Documentation
         return $endpoints->groupBy(function ($item, $key){
             $r =  new ReflectionClass($key);
             $item->group = $this->getClassDocBlocks($key);
-            dump($r->getNamespaceName());
             return str_replace(config('documentation.controller_path'), '', $r->getNamespaceName());
         }, true);
     }
