@@ -25,9 +25,7 @@ return [
     | default we document the routes/api.php You can enable the web option,
     | though it's recommended not to since web routes typically return a view.
     */
-    'documentable_routes' => [
-        'api',
-    ],
+    'routes' => 'api',
 
     /*
     |--------------------------------------------------------------------------

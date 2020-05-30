@@ -64,7 +64,7 @@ class DocumentationProvider implements Documentation
                 continue;
             }
 
-            if (array_intersect(config('documentation.documentable_routes'), $route->action['middleware']) < 1) {
+            if (!in_array(config('documentation.routes'), $route->action['middleware'])) {
                 continue;
             }
 
