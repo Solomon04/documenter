@@ -37,10 +37,6 @@ class DocumentationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (is_null(config('larecipe'))) {
-            throw new ApplicationSetupException('Please install larecipe before continuing. https://github.com/saleem-hadad/larecipe');
-        }
-
         $this->publishes([
             __DIR__.'../config/documentation.php' => config_path('documentation.php')
         ]);
