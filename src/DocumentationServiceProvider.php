@@ -38,7 +38,7 @@ class DocumentationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'../config/documentation.php' => config_path('documentation.php')
+            __DIR__.'/../config/documentation.php' => config_path('documentation.php')
         ]);
 
         if ($this->app->runningInConsole()) {
