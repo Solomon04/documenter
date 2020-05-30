@@ -107,7 +107,7 @@ class DocumentationProvider implements Documentation
         $metaAnnotations = $annotations->get(self::META);
         $responseAnnotations = $annotations->get(self::RESPONSE);
         $bodyAnnotations = $annotations->get(self::BODY_PARAM);
-        $queryAnnotations = null;
+        $queryAnnotations = $annotations->get(self::QUERY_PARAM);;
 
         if (!is_null($metaAnnotations)) {
             if (is_array($metaAnnotations)) {
@@ -142,6 +142,16 @@ class DocumentationProvider implements Documentation
                 }
             } else {
                 $endpoint->bodyParams = $this->extractor->body($bodyAnnotations);
+            }
+        }
+
+        if (!is_null($queryAnnotations)) {
+            if (is_array($queryAnnotations)) {
+                foreach ($queryAnnotations as $queryAnnotation) {
+                    $endpoint->queryParams[] = $this->extractor->query($queryAnnotation);
+                }
+            } else {
+                $endpoint->queryParams = $this->extractor->query($queryAnnotations);
             }
         }
 

@@ -38,7 +38,7 @@ Install Documenter via composer
 
 Publish provider
 
-`php artisan vendor:publish --provider="Solomon04\Documentation\DocumentationServiceProvider" --tag=config`
+`php artisan vendor:publish --provider="Solomon04\Documentation\DocumentationServiceProvider"`
 
 
 ### Steps
