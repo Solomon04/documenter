@@ -168,7 +168,7 @@ class FooController extends Controller
 
 ### Demo Laravel App
 
-View an [example](https://iamsolomon.io) of documentation using the Laravel REST API Documenter. 
+View an [example](https://github.com/Solomon04/documenter-example) of documentation using the Laravel REST API Documenter. 
 
 ### Tutorial 
 
