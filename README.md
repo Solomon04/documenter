@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  <img src="https://circleci.com/gh/Solomon04/documentation.svg" alt="CircleCI">
+  <img src="https://circleci.com/gh/Solomon04/documenter.svg" alt="CircleCI">
   <a href="https://packagist.org/packages/solomon04/documentation"><img src="https://poser.pugx.org/solomon04/documentation/d/total.svg" alt="Total Downloads"></a>
   <a href="https://packagist.org/packages/solomon04/documentation"><img src="https://poser.pugx.org/solomon04/documentation/v/stable.svg" alt="Latest Stable Version"></a>
   <a href="https://packagist.org/packages/solomon04/documentation"><img src="https://poser.pugx.org/solomon04/documentation/license.svg" alt="License"></a>
