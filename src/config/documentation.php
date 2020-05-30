@@ -36,4 +36,17 @@ return [
     | their subsequent endpoints.
     */
     'controller_path' => 'App\Http\Controllers\\',
+
+    /*
+    |--------------------------------------------------------------------------
+    | External Pages
+    |--------------------------------------------------------------------------
+    |
+    | Define extra pages you want to have in your documentation. Common examples
+    | include an overview page or auth page. You will need to create the pages
+    | within the resources/docs/1.x/ directory.
+    */
+    'pages' => [
+        'Overview'
+    ]
 ];

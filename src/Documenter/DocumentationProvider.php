@@ -79,7 +79,7 @@ class DocumentationProvider implements Documentation
             $endpoint = new Endpoint();
             $endpoint->uri = $uri;
             $endpoint->httpMethod = $route->methods[0];
-            $endpoint->requiresAuth = array_intersect(config('documentation.auth_middleware'), (array)$route->middleware()) > 0;
+            $endpoint->requiresAuth = count(array_intersect(config('documentation.auth_middleware'), (array)$route->middleware())) > 0;
             $endpoint->class = $uses[0];
             $endpoint->classMethod = $uses[1];
 
@@ -141,7 +141,7 @@ class DocumentationProvider implements Documentation
                     $endpoint->bodyParams[] = $this->extractor->body($bodyAnnotation);
                 }
             } else {
-                $endpoint->bodyParams = $this->extractor->body($bodyAnnotations);
+                $endpoint->bodyParams[] = $this->extractor->body($bodyAnnotations);
             }
         }
 
@@ -151,7 +151,7 @@ class DocumentationProvider implements Documentation
                     $endpoint->queryParams[] = $this->extractor->query($queryAnnotation);
                 }
             } else {
-                $endpoint->queryParams = $this->extractor->query($queryAnnotations);
+                $endpoint->queryParams[] = $this->extractor->query($queryAnnotations);
             }
         }
 
@@ -193,6 +193,7 @@ class DocumentationProvider implements Documentation
         return $endpoints->groupBy(function ($item, $key){
             $r =  new ReflectionClass($key);
             $item->group = $this->getClassDocBlocks($key);
+            dump($r->getNamespaceName());
             return str_replace(config('documentation.controller_path'), '', $r->getNamespaceName());
         }, true);
     }

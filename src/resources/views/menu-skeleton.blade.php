@@ -1,5 +1,8 @@
 - ## Getting Started
-  - [Overview](/&#123;&#123;route&#125;&#125;/&#123;&#123;version&#125;&#125;/overview)
+  @foreach(config('documentation.pages') as $page)
+  - [{{$page}}](/&#123;&#123;route&#125;&#125;/&#123;&#123;version&#125;&#125;/{{strtolower($page)}})
+  @endforeach
+
 - ## Endpoints
   @foreach($namespaces as $namespaceKey => $namespaceValue)
   - [{{$namespaceKey}}](#)

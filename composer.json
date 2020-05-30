@@ -1,9 +1,8 @@
 {
-    "name": "solomon04/documentation",
-    "type": "project",
-    "keywords": ["documentation", "larecipe", "openapi", "swagger", "apidoc", "api-documentation", "rest-api", "laravel-api"],
+    "name": "solomon04/documenter",
+    "keywords": ["documentation", "larecipe", "openapi", "swagger", "apidoc", "api-documentation", "documenter", "laravel-api"],
     "license": "MIT",
-    "description": "This allows you to generate documentation for applications that utilize LaRecipe",
+    "description": "Generate API Documentation for your Laravel applications using annotations & LaRecipe.",
     "authors": [
         {
             "name": "Solomon Antoine",
