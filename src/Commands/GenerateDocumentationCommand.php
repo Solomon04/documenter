@@ -5,9 +5,9 @@ namespace Solomon04\Documentation\Commands;
 use Solomon04\Documentation\Annotation\Endpoint;
 use Solomon04\Documentation\Contracts\Documentation;
 use Solomon04\Documentation\Contracts\Writer;
-use Solomon04\Documentation\StringBladeProvider;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Solomon04\Documentation\Documenter\StringBladeProvider;
 
 class GenerateDocumentationCommand extends Command
 {
@@ -51,11 +51,6 @@ class GenerateDocumentationCommand extends Command
      */
     protected $saved = 0;
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
     public function __construct(Documentation $documentation, StringBladeProvider $stringBladeProvider, Writer $writer)
     {
         parent::__construct();
