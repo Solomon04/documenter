@@ -36,7 +36,7 @@ class WriterProvider implements Writer
      */
     public function menu(Collection $namespaces)
     {
-        $blade =  $this->filesystem->get(__DIR__ . '../resources/views/menu-skeleton.blade.php');
+        $blade =  $this->filesystem->get(__DIR__ . '/../resources/views/menu-skeleton.blade.php');
         $markdown = $this->stringBlade->render($blade, ['namespaces' => $namespaces]);
         $markdown = $this->replaceBraces($markdown);
         $fileName = resource_path(config('larecipe.docs.route') . DIRECTORY_SEPARATOR . config('larecipe.versions.default') . DIRECTORY_SEPARATOR . 'index.md');
@@ -54,7 +54,7 @@ class WriterProvider implements Writer
      */
     public function page($endpoints, $name)
     {
-        $blade = $this->filesystem->get(__DIR__ . '../resources/views/page-skeleton.blade.php');
+        $blade = $this->filesystem->get(__DIR__ . '/../resources/views/page-skeleton.blade.php');
         $markdown = $this->stringBlade->render($blade, ['group' => $endpoints->group, 'endpoints' => $endpoints]);
         $markdown = $this->replaceQuotes($markdown);
         $path = resource_path(config('larecipe.docs.route') . DIRECTORY_SEPARATOR .config('larecipe.versions.default') . DIRECTORY_SEPARATOR . strtolower($name));

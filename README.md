@@ -19,50 +19,154 @@ This package allows you to generate documentation for your REST API via annotati
 
 ### Getting Started
 
-- Install [LaRecipe](https://larecipe.binarytorch.com.my/) before starting. 
-- Response examples must be stored in the `storage/` directory. 
-- Do not use commas inside your annotation strings, it will break the documentation reader.
+#### Install [LaRecipe](https://larecipe.binarytorch.com.my/)
+It is mandatory you install the LaRecipe package in order to get the benefits of the API documenter. 
 
-### Example
+Install LaRecipe via composer.
 
-#### Input:
-~~~php
-use Solomon04\Documentation\Annotation\BodyParam;
-use Solomon04\Documentation\Annotation\Group;
-use Solomon04\Documentation\Annotation\QueryParam;
-use Solomon04\Documentation\Annotation\ResponseExample;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+`composer require binarytorch/larecipe`
 
+Run the install command.
+
+`php artisan larecipe:install`
+
+#### Install Documenter
+
+Install Documenter via composer
+
+`composer require solomon04/documentation`
+
+Publish provider
+
+`php artisan vendor:publish --provider="Solomon04\Documentation\DocumentationServiceProvider" --tag=config`
+
+
+### Steps
+
+1. Go to an API controller
+2. Add [available annotations](#available-annotations) to the file. 
+3. Run `php artisan docs:generate`
+
+
+#### Available Annotations:
+
+##### @Group
+
+The group annotation is used to group endpoints within a single controller class. 
+
+##### Attributes
+- Name (required)
+- Description (optional)
+
+##### Example
+```php
 /**
  * @Group(name="Foo", description="This is an example group.")
  */
 class FooController extends Controller
 {
+
+}
+```
+
+##### @Meta
+
+The meta annotation is used to document a single endpoint. This would be a function within a controller class. 
+
+##### Attributes
+- Name (required)
+- Href (required)
+- Description (optional)
+
+##### Example
+```php
+class FooController extends Controller
+{
     /**
-     * @Meta(name="Example Response", description="This is an example endpoint.", href="example")
-     * @BodyParam(name="username", type="string", status="required", description="The username or email of the user", example="business_admin")
-     * @QueryParam(name="limit", type="numeric", status="optional", description="The limit", example="1")
-     * @ResponseExample(status=200, example="responses/")
-     *
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Illuminate\Validation\ValidationException
+    * @Meta(name="Example", description="This is an example endpoint.", href="example")
      */
-    public function bar(Request $request)
+    public function bar()
     {
-        $this->validate($request, [
-            'username' => ['required', 'string'],
-            'limit' => ['numeric']
-        ]);
+    
+    }
+}
+```
+
+##### @BodyParam
+
+The body param annotation is used to document the available body parameters within a single endpoint request.
+
+##### Attributes
+- Name (required)
+- Type (required)
+- Status (required)
+- Description (optional)
+- Example (optional)
+
+##### Example
+```php
+class FooController extends Controller
+{
+    /**
+    * @BodyParam(name="foo", type="string", status="required", description="An example body paramater", example="bar")
+     */
+    public function bar(FormRequest $request)
+    {
+    
+    }
+}
+```
+
+##### @QueryParam
+
+The query param annotation is used to document the available query parameters within a single endpoint request.
+
+##### Attributes
+- Name (required)
+- Type (required)
+- Status (required)
+- Description (optional)
+- Example (optional)
+
+##### Example
+```php
+class FooController extends Controller
+{
+    /**
+    * @QueryParam(name="foo", type="string", status="optional", description="An example query paramater", example="bar")
+     */
+    public function bar()
+    {
+    
+    }
+}
+```
+
+##### @ResponseExample
+
+The response example annotation is used to give an example response for an endpoint. 
+
+**Important Note:** Response example file must be stored in the `storage/` directory. 
+
+##### Attributes
+- Status (required)
+- Example (required)
+
+##### Example
+```php
+class FooController extends Controller
+{
+    /**
+    * @ResponseExample(status=200, example="responses/example.json")
+     */
+    public function bar()
+    {
         return response()->json(['foo' => 'bar']);
     }
 }
-~~~
+```
 
-#### Output:
-TODO
-
-### Demo
+### Demo Laravel App
 
 View an [example](https://iamsolomon.io) of documentation using the Laravel REST API Documenter. 
 

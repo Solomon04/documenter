@@ -27,7 +27,7 @@ class Meta
 
     public static function validate(array $meta)
     {
-        if (!isset($meta['status']) && !is_string($meta['status'])) {
+        if (!isset($meta['name']) && !is_string($meta['name'])) {
             throw new AnnotationException('The name of the @Meta is invalid or undefined.');
         }
 

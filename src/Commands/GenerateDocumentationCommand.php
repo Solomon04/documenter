@@ -8,6 +8,7 @@ use Solomon04\Documentation\Contracts\Writer;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Solomon04\Documentation\Documenter\StringBladeProvider;
+use Solomon04\Documentation\Exceptions\ApplicationSetupException;
 
 class GenerateDocumentationCommand extends Command
 {
@@ -66,6 +67,11 @@ class GenerateDocumentationCommand extends Command
      */
     public function handle()
     {
+        if (is_null(config('larecipe'))) {
+            $this->error('Please install LaRecipe before continuing.');
+            return;
+        }
+
         $routes = $this->documentation->getFilteredRoutes();
 
 
