@@ -89,6 +89,12 @@ class GenerateDocumentationCommand extends Command
         });
         $namespaces = $this->documentation->groupEndpoints($endpoints);
 
+        $namespaces = $namespaces->map(function ($namespace) {
+            $items = $namespace->all();
+            ksort($items);
+            return collect($items);
+        });
+
         $this->writer->menu($namespaces);
 
         $namespaces->map(function (Collection $namespace, string $name){
