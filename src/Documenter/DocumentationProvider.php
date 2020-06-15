@@ -21,6 +21,7 @@ class DocumentationProvider implements Documentation
     const QUERY_PARAM = 'QueryParam';
     const META = 'Meta';
     const GROUP = 'Group';
+    const SKIP = 'Skip';
 
     /**
      * @var \Minime\Annotations\Interfaces\ReaderInterface
@@ -93,7 +94,7 @@ class DocumentationProvider implements Documentation
      * Get docs for an endpoint.
      *
      * @param Endpoint $endpoint
-     * @return Endpoint
+     * @return Endpoint | boolean
      * @throws DocumentationException
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
@@ -107,7 +108,12 @@ class DocumentationProvider implements Documentation
         $metaAnnotations = $annotations->get(self::META);
         $responseAnnotations = $annotations->get(self::RESPONSE);
         $bodyAnnotations = $annotations->get(self::BODY_PARAM);
-        $queryAnnotations = $annotations->get(self::QUERY_PARAM);;
+        $queryAnnotations = $annotations->get(self::QUERY_PARAM);
+        $skip = $annotations->get(self::SKIP);
+
+        if (!is_null($skip)) {
+            return false;
+        }
 
         if (!is_null($metaAnnotations)) {
             if (is_array($metaAnnotations)) {
